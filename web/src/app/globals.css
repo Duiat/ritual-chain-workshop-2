@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #e4ebe8;
+  --block: #f3f6f4;
+  --ink: #243026;
+  --sienna: #b85c38;
+  --rule: #3d6b5a;
+}
+
+html, body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(36, 48, 38, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 48, 38, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  min-height: 100%;
+}
