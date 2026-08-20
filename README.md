@@ -1,13 +1,11 @@
-# Ritual Predict
+# The Loft
 
-A self-resolving binary prediction market on [Ritual Chain](https://docs.ritualfoundation.org).
+Draughtsman loft on Ritual. I file a sheet, hatch the ink, go home. The chain
+draws the line (`0x0801` + `0x0803`). No resolve button on the table.
 
-Create a market like _"Will ETH/USD be at least $4,000 when this market resolves?"_, stake native
-RITUAL on YES or NO, and watch it settle itself. When the betting window closes, **nobody presses a
-resolve button and no backend cron job runs**. The Ritual Scheduler wakes the contract at a block
-fixed when the market was created; the contract calls the HTTP precompile to read the configured
-oracle URL, extracts one number with the jq precompile, compares it to the target, and settles.
-Winners then pull their proportional share of the pool.
+Sage paper, sienna pencil, condensed title block. Notes: [TITLE.md](./TITLE.md) ·
+[NOTES.md](./NOTES.md) · [MISS.md](./MISS.md) (`Hairline` vs `ZeroStake`, and the
+uint256 loop that wrapped).
 
 ---
 
@@ -22,7 +20,7 @@ Winners then pull their proportional share of the pool.
                                                    └──────────────────────────┘
     ┌─────────────────────────────┐                     ▲              │
     │ Scheduler  0x56e7…D58B      │  onScheduledResolve │              │ deposit()
-    │ system contract             │─────────────────────┘              ▼
+    │ system contract             │─────────────────────              ▼
     │ fires at resolveBlock,      │                        ┌────────────────────────┐
     │ 3 attempts, 200 blocks apart│                        │ RitualWallet 0x532F…   │
     └─────────────────────────────┘                        │ prepaid execution fees │
@@ -30,7 +28,7 @@ Winners then pull their proportional share of the pool.
                         inside that one scheduled transaction:
 
    TEEServiceRegistry 0x9644…  ──pickServiceByCapability(HTTP_CALL)──▶  executor address
-   HTTP precompile    0x0801   ──GET oracleUrl (in a TEE)───────────▶  demo oracle
+   HTTP precompile    0x0801   ──GET oracleUrl (in a TEE)───────────▶  demo spec
    jq  precompile     0x0803   ──jsonPath, outputType=uint256───────▶  observed value
                                           │
                                           ▼
@@ -85,12 +83,17 @@ takes their stake back.
 - Node.js 20+ and `pnpm`
 - A wallet with testnet RITUAL from <https://faucet.ritualfoundation.org>
 
-## Setup
+## Local loft
 
 ```bash
-cd hardhat
-pnpm install
-cp .env.example .env
+cd hardhat && pnpm install && pnpm exec hardhat test
+cd ../web && pnpm install && pnpm dev
+```
+
+Four sheets, one file:
+
+```
+pnpm exec hardhat run scripts/file-sheets.ts
 ```
 
 ---
