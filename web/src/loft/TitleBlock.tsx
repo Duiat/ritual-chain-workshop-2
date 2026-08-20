@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   useAccount,
-  useChainId,
   useConnect,
   useDisconnect,
   useSwitchChain,
@@ -12,7 +11,7 @@ import { faucet, ritual } from "@/drawing/rail";
 
 function copy(raw: string) {
   if (/has not been authorized yet/i.test(raw)) {
-    return "This origin is not on the wallet sheet. Approve localhost:3000, then sign again.";
+    return "This origin is not on the wallet sheet. Approve the loft URL in the extension, then sign again.";
   }
   if (/rejected|denied|cancel/i.test(raw)) return "Title block unsigned.";
   return raw.split("\n")[0] || "Pen jammed.";

@@ -23,7 +23,7 @@ Spec printer is `/api/spec/eth`. Loopback on a sheet is `DeadUrl`. Tunnel it, or
 Four sheets after a 1979 deploy:
 
 ```
-PREDICT_ADDRESS=0x... ORACLE_URL=https://raw.githubusercontent.com/<you>/ritual-chain-workshop-2/main/spec.json
+PREDICT_ADDRESS=0x... ORACLE_URL=https://raw.githubusercontent.com/Duiat/ritual-chain-workshop-2/main/spec.json
 pnpm exec hardhat run scripts/file-sheets.ts
 ```
 
